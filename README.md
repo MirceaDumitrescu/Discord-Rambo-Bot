@@ -19,3 +19,5 @@ Returns a random meme in chat for you
 Add / Remove a new swear word to ban from chat (Requires Moderator Role)
 ### $role
 Adds you to a very prestigious role named 'Rambo Lover'
+### $mute / $unmute
+As the command says
