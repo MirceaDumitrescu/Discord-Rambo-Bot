@@ -1,0 +1,13 @@
+{
+    "bad_words": [
+        "fuck",
+        "cunt",
+        "f",
+        "slut",
+        "asshole"
+    ],
+    "version": 0.4100000000000002,
+    "warning_points": {
+        "162230630141132800": 0
+    }
+}
