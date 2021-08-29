@@ -1,6 +1,6 @@
 # Discord-Rambo-Bot
 
-##Help Commands
+## Help Commands
 Use the following commands with the prefix '$'
 
 This bot is the embodiment of our favorite all times
@@ -9,14 +9,13 @@ character RAMBO. His has the following functionalities:
 - Commands listed below
 
 
-$warnings
+### $warnings
 Displays how many warnings you have
-$dm
+### $dm
 Gives you an invite link for your friends
-$meme
+### $meme
 Returns a random meme in chat for you
-$add / $remove
+### $add / $remove
 Add / Remove a new swear word to ban from chat (Requires Moderator Role)
-$role
+### $role
 Adds you to a very prestigious role named 'Rambo Lover'
-www.rambobot.com
