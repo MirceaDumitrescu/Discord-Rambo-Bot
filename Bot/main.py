@@ -4,6 +4,10 @@ import os
 from os import path
 
 
+client = commands.Bot(command_prefix=["$", "!"])
+client.remove_command("help")
+
+
 def read(file: str):
     return json.load(open(file))
 
@@ -30,8 +34,3 @@ def version_no(v):
     db["version"] += 0.01
     write("db/db.json", db)
     return db["version"]
-
-
-# bot = discord.Client()
-client = commands.Bot(command_prefix=["$", "!"])
-client.remove_command("help")

@@ -1,5 +1,5 @@
-import discord
 from cog import client, db, write, warning_added
+import discord
 from discord.utils import get
 
 warnings = {}
@@ -16,9 +16,10 @@ async def on_message(message):
     # else:
     if any(word.lower() in msg.lower() for word in db["bad_words"]):
         key = str(message.author.id)
-        if key in db["warning_points"]:
-            if db["warning_points"][key] <= 1:
-                points = db["warning_points"][key]
+        points_database = db["warning_points"]
+        if key in points_database:
+            if db["warning_points"][key] <= 5:
+                points = points_database[key]
                 warning_added(key)
                 myEmbed = discord.Embed(
                     title="Message Deleted",
@@ -41,6 +42,7 @@ async def on_message(message):
                 )
                 await message.channel.send(embed=embed)
         else:
-            db["warning_points"] = {message.author.id: 0}
+            points_database = db["warning_points"]
+            points_database[message.author.id] = 1
             write("db/db.json", db)
     await client.process_commands(message)

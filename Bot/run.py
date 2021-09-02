@@ -1,4 +1,4 @@
-from moderator import client
+from player import client
 from dotenv import load_dotenv
 import os
 

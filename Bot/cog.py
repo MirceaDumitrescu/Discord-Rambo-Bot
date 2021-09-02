@@ -1,7 +1,7 @@
+from main import client, version_no, db, write
 import discord
 from discord.ext import commands
 from discord.utils import get
-from main import client, version_no, db, write
 from datetime import date
 import praw
 import random
@@ -55,6 +55,7 @@ async def on_disconnect():
 @client.command()
 async def close(ctx):
     await client.close()
+    await ctx.message.delete()
 
 
 @client.command()
@@ -96,6 +97,7 @@ async def help(ctx):
     myEmbed.set_footer(text="www.rambobot.com")
 
     await ctx.message.channel.send(embed=myEmbed)
+    await ctx.message.delete()
 
 
 @client.command(name="dm", pass_context=True)
@@ -103,6 +105,8 @@ async def dm(ctx, *argument):
     # creating invite link
     invitelink = await ctx.channel.create_invite(temporary=False, unique=True)
     # dming it to the person
+
+    await ctx.message.delete()
     await ctx.author.send(
         f"""**Hello {ctx.author}**
         
@@ -128,6 +132,7 @@ async def add(ctx, *, args):
                     color=0x00FF00,
                 )
                 await ctx.message.channel.send(embed=myEmbed)
+                await ctx.message.delete()
             else:
                 myEmbed = discord.Embed(
                     title="Error!",
@@ -135,6 +140,7 @@ async def add(ctx, *, args):
                     color=0xFF0000,
                 )
                 await ctx.message.channel.send(embed=myEmbed)
+                await ctx.message.delete()
         else:
             myEmbed = discord.Embed(
                 title="Error!",
@@ -142,6 +148,7 @@ async def add(ctx, *, args):
                 color=0xFF0000,
             )
             await ctx.message.channel.send(embed=myEmbed)
+            await ctx.message.delete()
     else:
         myEmbed = discord.Embed(
             title="No permission",
@@ -149,6 +156,7 @@ async def add(ctx, *, args):
             color=0xFF0000,
         )
         await ctx.message.channel.send(embed=myEmbed)
+        await ctx.message.delete()
 
 
 @client.command()
@@ -167,6 +175,7 @@ async def remove(ctx, *, args):
                 color=0xFFFF00,
             )
             await ctx.message.channel.send(embed=myEmbed)
+            await ctx.message.delete()
         else:
             myEmbed = discord.Embed(
                 title="Error!",
@@ -181,6 +190,7 @@ async def remove(ctx, *, args):
             color=0xFF0000,
         )
         await ctx.message.channel.send(embed=myEmbed)
+        await ctx.message.delete()
 
 
 @client.command(
@@ -193,10 +203,11 @@ async def role(ctx):
         await member.add_roles(role, atomic=True)
         myEmbed = discord.Embed(
             title="Rambo Role Added",
-            description=f"Enjoy your new EPIC ROLE {ctx.message.author}",
+            description=f"Enjoy your new EPIC ROLE **{ctx.message.author}**",
             color=0x00FF00,
         )
         await ctx.message.channel.send(embed=myEmbed)
+        await ctx.message.delete()
     else:
         myEmbed = discord.Embed(
             title="You already have that role",
@@ -204,6 +215,7 @@ async def role(ctx):
             color=0xFF0000,
         )
         await ctx.message.channel.send(embed=myEmbed)
+        await ctx.message.delete()
 
 
 @client.command(pass_context=True)
@@ -217,6 +229,7 @@ async def unmute(ctx, user: discord.Member):
             color=0x00FF00,
         )
         await ctx.message.channel.send(embed=myEmbed)
+        await ctx.message.delete()
     else:
         myEmbed = discord.Embed(
             title="The user is not Muted",
@@ -224,6 +237,29 @@ async def unmute(ctx, user: discord.Member):
             color=0xFFFF00,
         )
         await ctx.message.channel.send(embed=myEmbed)
+        await ctx.message.delete()
+
+
+@client.command(pass_context=True)
+async def mute(ctx, user: discord.Member):
+    role = get(ctx.guild.roles, name="Muted")
+    if role in user.roles:
+        myEmbed = discord.Embed(
+            title=f"{user} is already muted",
+            description=f"You can't mute a mute.",
+            color=0xFF0000,
+        )
+        await ctx.message.channel.send(embed=myEmbed)
+        await ctx.message.delete()
+    else:
+        await user.add_roles(role, atomic=True)
+        myEmbed = discord.Embed(
+            title="The user has been Muted",
+            description="'Live for nothing or die for something.' - Rambo",
+            color=0xFFFF00,
+        )
+        await ctx.message.channel.send(embed=myEmbed)
+        await ctx.message.delete()
 
 
 reddit = praw.Reddit(
@@ -241,3 +277,4 @@ async def meme(ctx):
         submission = next(x for x in memes_submissions if not x.stickied)
 
     await ctx.send(submission.url)
+    await ctx.message.delete()

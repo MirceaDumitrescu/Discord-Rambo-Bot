@@ -2,12 +2,21 @@
     "bad_words": [
         "fuck",
         "cunt",
-        "f",
         "slut",
-        "asshole"
+        "asshole",
+        "idiot",
+        "fucker",
+        "fucking",
+        "fuckyou",
+        "pussy",
+        "cock",
+        "nigga",
+        "nigger",
+        "shit"
     ],
-    "version": 0.4100000000000002,
+    "version": 0.9900000000000007,
     "warning_points": {
-        "162230630141132800": 0
+        "162230630141132800": 3,
+        "578540885428535296": 2
     }
 }
